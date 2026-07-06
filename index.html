@@ -313,6 +313,7 @@
       grid-template-columns: 1fr;
       gap: 12px;
       margin-top: 0;
+      align-items: start;
     }
     @media (min-width: 500px) { .spotify-grid { grid-template-columns: 1fr 1fr; } }
     @media (min-width: 900px) { .spotify-grid { grid-template-columns: repeat(4, 1fr); } }
@@ -328,8 +329,18 @@
       box-shadow: 0 12px 32px rgba(0,0,0,0.5);
     }
     .sp-embed iframe { border: none; border-radius: 0; display: block; }
-    .sp-slot { min-height: 80px; width: 100%; max-width: 100%; }
-    .sp-slot iframe { border: none; display: block; width: 100% !important; max-width: 100% !important; }
+    .sp-slot {
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden; /* recorta el exceso que Spotify agrega de más (bug conocido de su iFrame API) */
+    }
+    .sp-slot iframe {
+      border: none;
+      display: block;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: 100% !important; /* fuerza al iframe a llenar exactamente nuestra caja, sin espacio extra */
+    }
 
     /* ── YOUTUBE MODAL ── */
     .yt-modal-overlay {
@@ -1013,14 +1024,14 @@
       </div>
       <!-- ════ AGREGAR/QUITAR ÁLBUMES: cambia el data-uri (formato spotify:album:ID o spotify:track:ID) ════ -->
       <div class="spotify-grid">
-        <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:2WDRPC9f4BAXyz6ZILVGRk" data-height="280"></div></div>
-        <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:1GGHJXM76FR7Gg6FVC4YXm" data-height="280"></div></div>
-        <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:3AYmR4BJeFpfmLqISQcKpb" data-height="280"></div></div>
-        <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:1nGoIztQM15U0WpPkP5TE7" data-height="280"></div></div>
+        <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:2WDRPC9f4BAXyz6ZILVGRk" data-height="152"></div></div>
+        <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:1GGHJXM76FR7Gg6FVC4YXm" data-height="152"></div></div>
+        <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:3AYmR4BJeFpfmLqISQcKpb" data-height="152"></div></div>
+        <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:1nGoIztQM15U0WpPkP5TE7" data-height="152"></div></div>
         <div class="sp-embed"><div class="sp-slot" data-uri="spotify:track:4AANLvisPTdqUdUy4ULCkv" data-height="152"></div></div>
-        <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:1Qp5Nkk8tYLWNsYJDfpyc9" data-height="280"></div></div>
-        <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:2PzEhmz043ODPHpYL5CLPB" data-height="280"></div></div>
-        <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:6UbqHGE6Z9TalUvv8jbGWf" data-height="280"></div></div>
+        <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:1Qp5Nkk8tYLWNsYJDfpyc9" data-height="152"></div></div>
+        <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:2PzEhmz043ODPHpYL5CLPB" data-height="152"></div></div>
+        <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:6UbqHGE6Z9TalUvv8jbGWf" data-height="152"></div></div>
       </div>
       <p style="margin-top:14px;font-size:0.68rem;color:rgba(255,255,255,0.25);text-align:center;">🎵 Al reproducir un álbum, los demás se pausan automáticamente</p>
 
@@ -1040,22 +1051,27 @@
         <div class="sp-embed"><div class="sp-slot" data-uri="spotify:track:2Vr9BfKABjneWz9W7bERBg" data-height="152"></div></div>
         <div class="sp-embed"><div class="sp-slot" data-uri="spotify:track:4TSEBVbnv98wI1N4sl39hY" data-height="152"></div></div>
         <div class="sp-embed"><div class="sp-slot" data-uri="spotify:track:7gkD8redMLMsUT9daTesH9" data-height="152"></div></div>
-        <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:0LgOa685AhlXbwQz8YS3ho" data-height="280"></div></div>
+        <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:0LgOa685AhlXbwQz8YS3ho" data-height="152"></div></div>
         <div class="sp-embed"><div class="sp-slot" data-uri="spotify:track:64QUaHYYPtasDZFJoKeDPx" data-height="152"></div></div>
         <div class="sp-embed"><div class="sp-slot" data-uri="spotify:track:1QX6uxbJy1vNTHzxprxE76" data-height="152"></div></div>
         <div class="sp-embed"><div class="sp-slot" data-uri="spotify:track:4oBZqfHR3LsKaHA6qls31c" data-height="152"></div></div>
       </div>
 
       <!-- ════ CUBAN BEATS ALL STARS ════ Álbum en el que Ruzzo participó tras su etapa en Orishas ════ -->
+      <!-- Solo se muestran las 5 canciones con muestra disponible en Spotify (Cubañol, Back Benny, La Cuerda, Yemayá, La Receta) -->
       <div style="margin-top:48px;">
         <p class="lbl" style="text-align:left;">Colaboración Especial</p>
         <h3 style="font-family:'Roboto Condensed',sans-serif;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:700;text-transform:uppercase;color:var(--white);margin-top:4px;">Cuban Beats All Stars</h3>
         <div class="divider"></div>
         <p style="font-size:0.85rem;line-height:1.7;color:rgba(255,255,255,0.6);max-width:600px;margin-bottom:24px;">
-          Ruzzo MC participó en este álbum como parte de la agrupación <strong style="color:var(--white);">Cuban Beats All Stars</strong>, durante su etapa tras Orishas.
+          Ruzzo MC participó en este álbum como parte de la agrupación <strong style="color:var(--white);">Cuban Beats All Stars</strong>, durante su etapa tras Orishas. Álbum "La Receta" (2015).
         </p>
-        <div class="spotify-grid" style="grid-template-columns:1fr;max-width:400px;">
-          <div class="sp-embed"><div class="sp-slot" data-uri="spotify:album:3AI6UORwMDjxdnfhBnvFpF" data-height="380"></div></div>
+        <div class="spotify-grid">
+          <div class="sp-embed"><div class="sp-slot" data-uri="spotify:track:0gJaGr05lXLj433R6HvyWX" data-height="152"></div></div>
+          <div class="sp-embed"><div class="sp-slot" data-uri="spotify:track:3VsvH3EF5JJ8f6qdDQLxSq" data-height="152"></div></div>
+          <div class="sp-embed"><div class="sp-slot" data-uri="spotify:track:7xKMCRuhuXLr8HvSfcwY2z" data-height="152"></div></div>
+          <div class="sp-embed"><div class="sp-slot" data-uri="spotify:track:0to2ZAjDkEumdgcEJTAdNQ" data-height="152"></div></div>
+          <div class="sp-embed"><div class="sp-slot" data-uri="spotify:track:026BS7SzZuPJAv0tpAiNDH" data-height="152"></div></div>
         </div>
       </div>
     </div>
@@ -1632,39 +1648,43 @@
   // ── SPOTIFY: REPRODUCCIÓN EXCLUSIVA (API OFICIAL) ──
   // Usa la API oficial de Spotify para controlar los reproductores.
   // Cuando uno empieza a sonar, se pausan todos los demás automáticamente.
+  // IMPORTANTE: se crean UNO A LA VEZ (en fila) porque crear muchos al mismo
+  // tiempo hace que Spotify falle en asignar el control de "play" a algunos.
   window.spotifyControllers = [];
+  let spotifyAPI = null;
+  const spotifyQueue = [];
+  let spotifyBusy = false;
+
+  function processSpotifyQueue() {
+    if (spotifyBusy || spotifyQueue.length === 0 || !spotifyAPI) return;
+    spotifyBusy = true;
+    const slot = spotifyQueue.shift();
+    const desiredHeight = parseInt(slot.dataset.height) || 152;
+    // Forzamos el tamaño exacto de la caja ANTES de crear el reproductor,
+    // así recortamos el espacio extra que Spotify agrega de más (bug conocido).
+    slot.style.height = desiredHeight + 'px';
+    const options = {
+      uri: slot.dataset.uri,
+      height: desiredHeight,
+      width: '100%'
+    };
+    spotifyAPI.createController(slot, options, (controller) => {
+      window.spotifyControllers.push(controller);
+      controller.addListener('playback_update', (e) => {
+        if (e.data && e.data.isPaused === false) {
+          // Este empezó a sonar: pausar todos los demás
+          window.spotifyControllers.forEach((other) => {
+            if (other !== controller) {
+              other.pause();
+            }
+          });
+        }
+      });
+      spotifyBusy = false;
+      setTimeout(processSpotifyQueue, 150); // pequeña pausa antes de crear el siguiente
+    });
+  }
 
   window.onSpotifyIframeApiReady = (IFrameAPI) => {
-    const slots = document.querySelectorAll('.sp-slot');
-    slots.forEach((slot) => {
-      const options = {
-        uri: slot.dataset.uri,
-        height: slot.dataset.height || 280,
-        width: '100%'
-      };
-      IFrameAPI.createController(slot, options, (controller) => {
-        window.spotifyControllers.push(controller);
-        controller.addListener('playback_update', (e) => {
-          if (e.data && e.data.isPaused === false) {
-            // Este empezó a sonar: pausar todos los demás
-            window.spotifyControllers.forEach((other) => {
-              if (other !== controller) {
-                other.pause();
-              }
-            });
-          }
-        });
-      });
-    });
-  };
-
-  // Cargar el script oficial de Spotify IFrame API
-  (function loadSpotifyAPI() {
-    const script = document.createElement('script');
-    script.src = 'https://open.spotify.com/embed/iframe-api/v1';
-    script.async = true;
-    document.head.appendChild(script);
-  })();
-</script>
-</body>
-</html>
+    spotifyAPI = IFrameAPI;
+    process
